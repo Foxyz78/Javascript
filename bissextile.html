@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Bissextile</title>
+</head>
+<body>
+    <p id="result"></p>
+    <script>
+
+var annee = parseInt(prompt("Entrez l'année pour connaitre le nombre de jours"), 10);
+
+function jours(arg) {
+    let bissextile = 366;
+    let nonBissextile = 365;
+ 
+    // Vérifie si annee est un multiple de 4 mais pas de 100 ou 
+    if (annee % 4 == 0 && annee % 100 != 0 || annee % 400 == 0) {
+        alert("L'année " + annee + " est bissextile, il y a donc " + bissextile + " jours dans l'année");
+    }
+    else alert("L'année " + annee + " n'est pas bissextile, il y a donc " + nonBissextile + " jours dans l'année");
+}
+
+jours(annee);
+
+    </script>
+</body>
+</html>

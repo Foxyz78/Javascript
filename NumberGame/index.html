@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>DEVINE LE NOMBRE !</h1>
+      <p class="between">(ENTRE 1 ET 20)</p>
+      <button class="btn again">RESET !</button>
+      <div class="number">?</div>
+    </header>
+
+    <main>
+      <section class="left">
+        <input type="number" class="guess" />
+        <button class="btn check">VALIDEZ !</button>
+      </section>
+      <section class="right">
+        <p class="message">COMMENCEZ...</p>
+        <p class="label-score">💯 SCORE : <span class="score">20</span></p>
+        <p class="labe-highscore">
+          🥇 HIGHSCORE : <span class="highscore">0</span>
+        </p>
+        <br /><br />
+        <!--<p class="sound">🔊
+        <span class="start" onclick="playSound();">⏯️</span><span class="stop" onclick="muteSound();">⏹️</span>
+      </p>-->
+        <p class="chrono">
+          <span class="minute">01</span>:<span class="seconde">00</span>
+        </p>
+      </section>
+    </main>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

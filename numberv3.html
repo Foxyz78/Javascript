@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let nombre; //nombre saisie par l'utilisateur dans le prompt.
+
+        let uniteLettres = ["un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", ];
+        let dizaineSPLettres = ["onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit",
+            "dix-neuf"
+        ];
+        let dizaineLettres = ["dix", "vingt", "trente", "quarante", "cinquante", "soixante", "soixante-dix",
+            "quatre-vingt", "quatre-vingt-dix",
+        ];
+        let centaineLettres = ["cent", "deux-cent", "trois-cent", "quatre-cent", "cinq-cent", "six-cent", "sept-cent",
+            "huit-cent", "neuf-cent",
+        ];
+
+        let uniteTemp, dizaineTemp, centaineTemp; //variables temporaires pour les unités, dizaines et centaines.
+
+        let nombreEnLettre = ""; // résultat final apres conversion
+
+        while ((nombre = prompt("Entrez un nombre entre 0 et 999 : "))) {
+            if (isNaN(nombre) || nombre < 0 || nombre > 999) {
+                alert("Erreur");
+                break;
+            }
+
+            if (nombre == 0) {
+                alert("zéro");
+            } else {
+                nombre = nombre.toString();
+                // traitement permettant de convertir en lettre un chiffre inférieur à 10.
+                if (nombre.length == 1) {
+                    for (i = 0; i < 10; i++) {
+                        if (nombre == i) {
+                            alert(uniteLettres[i - 1]);
+                        }
+                    }
+                }
+                // Traitement pour les nombres entre 10 et 99
+                if (nombre.length == 2) {
+                    uniteTemp;
+                    dizaineTemp;
+                    let temp;
+
+                    for (i = 0; i < 10; i++) {
+                        // Pour les nombres entre 10 et 20
+                        if (nombre.charAt(0) == i) {
+                            dizaineTemp = dizaineLettres[i - 1];
+                        }
+                        if (nombre.charAt(1) == i) {
+                            uniteTemp = "-" + uniteLettres[i - 1];
+                        }
+                        if (nombre.charAt(1) == 0) {
+                            uniteTemp = "";
+                        }
+                        // Formate le texte en rajoutant "et" pour les nombres terminant par 1 entre 20 et 70.
+                        if (nombre.charAt(1) == 1 && nombre.charAt(0) != 1 && nombre.charAt(0) < 7) {
+                            uniteTemp = "-et-" + uniteLettres[0];
+                        }
+
+                        // Pour les nombres de 11 à 19.
+                        if (nombre.charAt(1) == i && nombre.charAt(0) == 1 && nombre.charAt(0) < 2) {
+                            uniteTemp = dizaineSPLettres[i - 1];
+                            dizaineTemp = "";
+                            nombreEnLettre = dizaineTemp + uniteTemp;
+                        }
+
+                        // Pour les nombres de 70 à 79
+                        if (nombre.charAt(0) == 7) {
+                            dizaineTemp = dizaineLettres[5];
+                            // 71 !!
+                            if (nombre.charAt(1) == 1) {
+                                uniteTemp = "-et-" + dizaineSPLettres[0];
+                                break;
+                            }
+                            if (nombre.charAt(1) != 0) {
+                                uniteTemp = "-" + dizaineSPLettres[nombre.charAt(1) - 1];
+                            } else uniteTemp = "-dix"; // 70
+
+                            nombreEnLettre = dizaineTemp + uniteTemp;
+                        }
+
+                        // Pour les nombres de 90 à 99
+                        if (nombre.charAt(0) == 9) {
+                            dizaineTemp = dizaineLettres[7];
+
+                            if (nombre.charAt(1) != 0) {
+                                uniteTemp = "-" + dizaineSPLettres[nombre.charAt(1) - 1];
+                            } else uniteTemp = "-dix"; // 90
+
+                            nombreEnLettre = dizaineTemp + uniteTemp;
+                        }
+                    } //alert(nombreEnLettre);
+                    alert(dizaineTemp + uniteTemp);
+                }
+
+
+                /************ Traitement des CENTAINES !! *********************/
+                /*************************************************************/
+                /*************************************************************/
+                if (nombre.length == 3) {
+                    uniteTemp;
+                    dizaineTemp;
+                    centaineTemp;
+
+                    // Traitement des nombres où les dizaines et les unités sont équivalents à 0 (exemple : 200)
+                    if (nombre.charAt(1) == 0 && nombre.charAt(2) == 0) {
+                        if (nombre.charAt(0) == 1) {
+                            alert(centaineLettres[nombre.charAt(0) - 1]);
+                        } else alert(centaineLettres[nombre.charAt(0) - 1] +
+                            "s");
+                        // Traitement des nombres autres que 100
+                    } else if (nombre.charAt(2) == 0)
+                        // Traitement pour les nombres terminant par dix
+                        alert(centaineLettres[nombre.charAt(0) - 1] + "-" + dizaineLettres[nombre.charAt(1) - 1]);
+                    else if (nombre.charAt(1) == 0 && nombre.charAt(2) != 0)
+                        alert(
+                            centaineLettres[nombre.charAt(0) - 1] +
+                            "-" +
+                            uniteLettres[nombre.charAt(2) - 1]
+                        );
+                    else if (nombre.charAt(1) == 1) {
+                        // Traitement des nombres entre 111 et 120
+                        alert(centaineLettres[nombre.charAt(0) - 1] + "-" + dizaineSPLettres[nombre.charAt(2) - 1]);
+                        dizaineTemp = "-" + dizaineSPLettres[nombre.charAt(2) - 1];
+                    } else if (nombre.charAt(1) != 7 && nombre.charAt(1) != 9 && nombre.charAt(2) == 1)
+                        alert(centaineLettres[nombre.charAt(0) - 1] + "-" +
+                            dizaineLettres[nombre.charAt(1) - 1] + "-et-" + uniteLettres[nombre.charAt(2) - 1]);
+                    else if (nombre.charAt(1) == 7) { // pour les 70+
+                        if (nombre.charAt(2) != 0 && nombre.charAt(2) != 1)
+                            alert(centaineLettres[nombre.charAt(0) - 1] + "-" + dizaineLettres[5] + "-" +
+                                dizaineSPLettres[nombre.charAt(2) - 1]);
+                        // Formatage du nombre 71
+                        if (nombre.charAt(2) == 1)
+                            alert(centaineLettres[nombre.charAt(0) - 1] + "-" + dizaineLettres[5] + "-et-" +
+                                dizaineSPLettres[nombre.charAt(2) - 1]);
+                        // pour les 90+
+                    } else if (nombre.charAt(1) == 9) {
+                        if (nombre.charAt(2) != 0)
+                            alert(centaineLettres[nombre.charAt(0) - 1] + "-" + dizaineLettres[7] + "-" +
+                                dizaineSPLettres[nombre.charAt(2) - 1]);
+                    } else alert(centaineLettres[nombre.charAt(0) - 1] + "-" + dizaineLettres[nombre.charAt(1) - 1] +
+                        "-" + uniteLettres[nombre.charAt(2) - 1]);
+                    //alert(centaineTemp + dizaineTemp);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
